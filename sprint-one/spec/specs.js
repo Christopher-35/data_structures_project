@@ -18,9 +18,9 @@ define([
 
   describe('stack', function() {
 
-    var stack;
-    var instantiator = Stack;
-    var prototypeOfInstances = variant === 'prototypal' && stackMethods;
+    var stack;//declare stack
+    var instantiator = Stack;//assign instantiator to stack
+    var prototypeOfInstances = variant === 'prototypal' && stackMethods; //
 
     beforeEach(function() {
       if (variant === 'pseudoclassical' || variant === 'es6') {
