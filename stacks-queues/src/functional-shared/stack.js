@@ -1,37 +1,34 @@
 var Stack = function() {
-  // Hey! Rewrite in the new style. Your code will wind up looking very similar,
-  // but try not not reference your old code in writing the new style.
-  var obj = {};  
-  //obj.storage = 0;
+  var obj = {};
   obj.length = 0;
-  
-  _.extend(obj, objMethods);
+  obj.storage = {};
+  //Object.assign(obj, stackMethods);  EITHER ORRRR
+  _.extend(obj,stackMethods);
   return obj;
 };
 
-var objMethods = {};
-objMethods.push = function(value){
-  this[this.length] = value;//temporary var for storing a key value pair, 
-  
-    this.length ++;             //then increment the key and return temp
-    //return this.length;
-}
+var stackMethods = {};
 
-objMethods.pop = function(){
-  if (this.length > 0){             //if length var is greater than 0
-    //assign a temp to the most recent var 
-        //MUST INCLUDE -1 FOR THEE LAST ELEMENT
-    this.length--;                    //decrement length bc you popped the value
-   }
-   var pop = this[this.length];
-   delete this[this.length];
-   return pop;
+stackMethods.push = function(value){
+  this.storage[this.length] = value;
+  this.length++;
+ 
+  return length;
+};
 
-}
+stackMethods.pop = function(){
+  if (this.length > 0){
+    let temp = this.storage[this.length-1];
+    delete this.storage[this.length-1];
+    this.length--
+    return temp;
 
-objMethods.size = function(){
- return this.length;
+  }
 
-}
+};
+
+stackMethods.size = function(){
+  return this.length;
+};
 
 

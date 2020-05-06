@@ -1,37 +1,39 @@
 class Queue {
   // Hey! Rewrite in the new style. Your code will wind up looking very similar,
   // but try not not reference your old code in writing the new style.
+
   constructor() {
+    this.storage = {};
     this.length = 0;
-    this.oldProp = 0; 
-    this.newProp = 0; 
-    this.storage = {}; 
-
+    this.top = 0;
+    this.bottom = 0;
   }
 
-  enqueue(value){
-  this.length ++;              //increase length when adding prop
-  this.storage[this.newProp] = value;//store a new property in storage
-  this.newProp++; 
+  enqueue(value) {
+    //create var in storage WITH TOP equal to value
+    this.storage[this.top] = value;
+    //increment top
+    this.top++;
+    //decrement length
+    this.length++;
   }
 
-  dequeue(){
-    if (this.length !== 0){
-      this.length--;
+  dequeue() {
+    //create if if length > 0
+    if (this.length > 0){
+    //create temp WITH STORAGE BOTTOM VALUE
+    let temp = this.storage[this.bottom];
+    //delete that value
+    delete this.storage[this.bottom];
+    //increment bottom
+    this.bottom++;
+    //decrement length
+    this.length--;
+    return temp;
     }
-    var temp = this.storage[this.oldProp];//set temp var equal to oldest prop
-    //delete this.storage[this.oldProp];
-    this.oldProp++;//increase oldes prop key
-    return temp; //return that stored value
   }
 
-  size(){
-    return this.length || 0;
+  size() {
+    return this.length;
   }
-
-
-
-
 }
-
-

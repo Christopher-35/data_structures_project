@@ -1,37 +1,34 @@
 var Queue = function() {
-  
-  
-var obj = Object.create(queueMethods);//THIS REFERS TO OBJ
 
-obj.length = 0;
-obj.newProp = 0;
-obj.oldProp = 0;
-obj.storage = {};
-  
+  var obj = Object.create(queueMethods);
+  obj.length = 0;
+  obj.storage = {};
+  obj.top = 0;
+  obj.bottom = 0;
   return obj;
 };
 
-  var queueMethods = {
+var queueMethods = {};
 
-  enqueue : function(value) {
-    this.length ++;              //increase length when adding prop
-    this.storage[this.newProp] = value;//store a new property in storage
-    this.newProp++;             //increment new prop var so u dont overwrite
-      },
+queueMethods.enqueue = function(value) {
+  this.storage[this.top] = value;
+  this.top++;
+  this.length++;
 
-  dequeue : function() {
-    if (this.length !== 0){
-      this.length--;
-    }
-    var temp = this.storage[this.oldProp];//set temp var equal to oldest prop
-    //delete this.storage[this.oldProp];
-    this.oldProp++;//increase oldes prop key
-    return temp; //return that stored value
-  },
+};
 
-  size : function() {
-    return this.length || 0;
-  },
+queueMethods.dequeue = function() {
+  if (this.length > 0) {
 
+    let temp = this.storage[this.bottom];
+    delete this.storage[this.bottom];
+    this.length--;
+    this.bottom++;
+    return temp;
+  }
+};
+
+queueMethods.size = function() {
+  return this.length;
 };
 

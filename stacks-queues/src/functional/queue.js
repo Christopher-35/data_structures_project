@@ -1,42 +1,41 @@
-  function Queue(){
+var Queue = function() {
   var someInstance = {};
 
-  // Use an object with numeric keys to store values
   var storage = {};
-  let top = 0;
-  let bottom = 0;
-  // Implement the methods below
-
+  //create length var
+  var length = 0;
+  //create top var
+  var top = 0; //used for enqueue
+  //create bottom var to increment
+  var bottom = 0; //used for dequeue
   someInstance.enqueue = function(value) {
-    storage[top] = value;//temporary var for storing a key value pair, 
-     top ++;             //then increment the key and return temp
-    return top;
+    // NEED TOP AND BOTTOM VAR SO WE DONT OVERWRITE VALUES WHEN LENGTH IS INCREASED AND DECREASED
+    //have storage [length] = value;
+    storage[top] = value;
+    //increment length
+    length++;
+    top++;
   };
 
   someInstance.dequeue = function() {
-    if (bottom < top){             //if top var is greater than 0
-      // let temp = storage[0];  //assign a temp to the oldest
-      // delete storage[0];     //MUST delete oldeest value
-      // top--;                 //decrement top bc you popped the value
-      // return temp;
-     //loop over object, set temp = to key
-      
+    //create if stmt for if length > 0
+    if (length > 0) {
+      //then we store temp var with bottom index-value
       let temp = storage[bottom];
+      //delete the actual value
       delete storage[bottom];
-      
+      //decrement length
+      length--;
+      //increment bottom
       bottom++;
+      //return temp
       return temp;
-     }
+    }
   };
 
   someInstance.size = function() {
-    // if (bottom === 0){
-    //   return top;
-    // }
-    return top -bottom;
+    return length;
   };
 
   return someInstance;
-
 };
-

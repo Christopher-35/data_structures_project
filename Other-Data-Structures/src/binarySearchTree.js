@@ -1,53 +1,68 @@
-var BinarySearchTree = function(value) {
-  var obj = {};
-  obj.value = value;
-  obj.right = null;
-  obj.left = null;
-  _.extend(obj, tMethods);
-//obj.count = 0;
-  return obj;
-};
+var BinarySearchTree = function(value){
+  let btree = Object.create(binaryMethods);
+  btree.value = value;
+  btree.right = null;
+  btree.left = null;
+  return btree;
+}
 
-var tMethods = {
-  // left: function(){
-  // this.left = null;
-  // },
+let binaryMethods = {};
 
-  // right: function(){
-  // this.right =
-  // },
+binaryMethods.insert = function(value){
+if (value < this.value && this.left === null){
+  this.left = new BinarySearchTree(value);
+}
+if (value < this.value && this.left !== null){
+  this.left.insert(value);
+}
 
-  insert: function(value) {
-    //this.count++;
+if (value > this.value && this.right === null){
+  this.right = new BinarySearchTree(value);
+}
+if (value > this.value && this.right !== null){
+  this.right.insert(value);
+}
 
-    if (value < this.value) {
-      if (this.left === null) {
-        this.left = value;
-      } else {
-        this.insert(this.right);
-      }
+if (value === this.value){
+  return;
+}
+
+
+}
+
+binaryMethods.contains = function(value){
+  let overide = false;
+  let currentNode = this;
+  console.log(currentNode);
+  while(currentNode){
+    if (currentNode.value === value){
+      overide = true;
+      break;
     }
-    if (value > this.value) {
-      if (this.right === null) {
-        this.right = value;
-      } else {
-        this.insert(this.left);
-      }
+
+    if (value < currentNode.value){
+      currentNode = currentNode.left;
     }
-  },
 
-  addChild: function(value) {},
+    if (value > currentNode.value){
+      currentNode = currentNode.right;
+    }
 
-  contains: function(value) {}
-};
-// BinarySearchTree.prototype.left = function(){
+  }
 
-// }
+  return overide;
 
-// BinarySearchTree.prototype.right = function(){
 
-// }
+}
 
-/*
- * Complexity: What is the time complexity of the above functions?
- */
+binaryMethods.depthFirstLog = function(cb){
+  cb(this.value);
+
+  if (this.left){
+    this.left.depthFirstLog(cb);
+  }
+
+  if (this.right){
+    this.right.depthFirstLog(cb);
+  }
+}
