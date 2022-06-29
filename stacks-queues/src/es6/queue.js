@@ -1,8 +1,5 @@
 class Queue {
-  // Hey! Rewrite in the new style. Your code will wind up looking very similar,
-  // but try not not reference your old code in writing the new style.
-
-  constructor() {
+  constructor () {
     this.storage = {};
     this.length = 0;
     this.top = 0;
@@ -10,30 +7,29 @@ class Queue {
   }
 
   enqueue(value) {
-    //create var in storage WITH TOP equal to value
-    this.storage[this.top] = value;
-    //increment top
-    this.top++;
-    //decrement length
     this.length++;
+    this.top++;
+    this.storage[this.top] = value;
   }
 
-  dequeue() {
-    //create if if length > 0
+  dequeue(){
     if (this.length > 0){
-    //create temp WITH STORAGE BOTTOM VALUE
-    let temp = this.storage[this.bottom];
-    //delete that value
-    delete this.storage[this.bottom];
-    //increment bottom
-    this.bottom++;
-    //decrement length
-    this.length--;
-    return temp;
+      this.bottom++;
+      let temp = this.storage[this.bottom];
+      delete this.storage[this.bottom];
+      this.length--;
+      return temp;
     }
   }
 
-  size() {
+  size(){
     return this.length;
   }
 }
+
+const bass = new Queue();
+
+console.log(bass.enqueue('a'));
+console.log(bass.dequeue());
+console.log(bass.enqueue('b'));
+console.log(bass.dequeue());

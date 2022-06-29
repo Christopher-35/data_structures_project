@@ -1,32 +1,24 @@
 class Stack {
-  // Hey! Rewrite in the new style. Your code will wind up looking very similar,
-  // but try not not reference your old code in writing the new style.
-  constructor() {
+  constructor () {
     this.storage = {};
     this.length = 0;
   }
 
-  push(value) {
-    //create var in storage with length
-    this.storage[this.length] = value;
-    //increment length
+  push (value) {
     this.length++;
+    this.storage[this.length] = value;
   }
 
-  pop(value) {
-    //create if if length is longer than 0
-    if (this.length > 0) {
-      //then create temp var in storage WITH LENGTH -1
-      let temp = this.storage[this.length - 1];
-      //delete property
-      delete this.storage[this.length - 1];
-      //decrement length
+  pop () {
+    if (this.length > 0){
+      let value = this.storage[this.length];
+      delete this.storage[this.length];
       this.length--;
-      return temp;
+      return value;
     }
   }
 
-  size(value) {
+  size () {
     return this.length;
   }
 }
