@@ -9,6 +9,10 @@ var BinarySearchTree = function(value){
 let binaryMethods = {};
 
 binaryMethods.insert = function(value){
+// if (this.left === null && this.right===null){
+//   this.value = value;
+// }
+
 if (value < this.value && this.left === null){
   this.left = new BinarySearchTree(value);
 }
@@ -31,28 +35,18 @@ if (value === this.value){
 }
 
 binaryMethods.contains = function(value){
-  let overide = false;
-  let currentNode = this;
-  console.log(currentNode);
-  while(currentNode){
-    if (currentNode.value === value){
-      overide = true;
-      break;
-    }
-
-    if (value < currentNode.value){
-      currentNode = currentNode.left;
-    }
-
-    if (value > currentNode.value){
-      currentNode = currentNode.right;
-    }
-
+  console.log('this', this.value);
+  console.log('val', value);
+  if (value === this.value) {
+    return true;
+  } else if (value < this.value && this.left) {
+    return this.left.contains(value);
+  } else if (value > this.value && this.right) {
+    console.log('val', value);
+    return this.right.contains(value);
+  } else {
+    return false;
   }
-
-  return overide;
-
-
 }
 
 binaryMethods.depthFirstLog = function(cb){
@@ -66,3 +60,13 @@ binaryMethods.depthFirstLog = function(cb){
     this.right.depthFirstLog(cb);
   }
 }
+
+let bSearch = BinarySearchTree(5);
+
+bSearch.insert(5);
+bSearch.insert(6);
+bSearch.insert(7);
+console.log(bSearch.contains(7));
+
+
+console.log(bSearch);
